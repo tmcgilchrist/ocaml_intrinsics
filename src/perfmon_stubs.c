@@ -41,6 +41,26 @@ static uint64_t rdtsc()
   asm volatile("mrs %0, cntvct_el0" : "=r" (tsc));
   return tsc;
 }
+#elif defined(__ppc64__)
+static uint64_t rdpmc(__attribute__ ((unused)) uint32_t c) { return 0; }
+
+static uint64_t rdtsc()
+{
+    uint64_t tsc;
+    asm volatile("mfspr %%r3, 268" : "=r" (tsc));
+    return tsc;
+}
+
+#elif defined(__riscv)
+static uint64_t rdpmc(__attribute__ ((unused)) uint32_t c) { return 0; }
+
+static uint64_t rdtsc()
+{
+    uint64_t tsc;
+    asm volatile("rdcycle a0" : "=r" (tsc));
+    return tsc;
+}
+
 #else
 static uint64_t rdpmc(__attribute__ ((unused)) uint32_t c) { return 0; }
 static uint64_t rdtsc() { return 0; }
