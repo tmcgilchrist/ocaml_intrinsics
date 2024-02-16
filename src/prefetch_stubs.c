@@ -329,7 +329,7 @@ CAMLprim value caml_pause_hint (__attribute__ ((unused)) value unit)
 #elif ((defined(__i386__) || defined(__x86_64__)) && defined(_MSC_VER))
   _mm_pause();
 #else
-#warning "This target does not support PAUSE hints, emit NOP instead."
+/* #warning "This target does not support PAUSE hints, emit NOP instead." */
     /* do nothing */
 #endif
   return Val_unit;
