@@ -51,7 +51,7 @@ static uint64_t rdtsc()
     return tsc;
 }
 
-#elif defined(__riscv)
+#elif defined(__riscv__) || defined (__riscv)
 static uint64_t rdpmc(__attribute__ ((unused)) uint32_t c) { return 0; }
 
 static uint64_t rdtsc()
@@ -61,7 +61,7 @@ static uint64_t rdtsc()
     return tsc;
 }
 
-#elif defined(__s390x)
+#elif defined(__s390x__)
 static uint64_t rdpmc(__attribute__ ((unused)) uint32_t c) { return 0; }
 
 static uint64_t rdtsc()
@@ -70,7 +70,6 @@ static uint64_t rdtsc()
     asm volatile("stck %0" : "=r" (tsc));
     return tsc;
 }
-
 
 #else
 static uint64_t rdpmc(__attribute__ ((unused)) uint32_t c) { return 0; }
