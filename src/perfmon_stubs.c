@@ -47,7 +47,7 @@ static uint64_t rdpmc(__attribute__ ((unused)) uint32_t c) { return 0; }
 static uint64_t rdtsc()
 {
     uint64_t tsc;
-    asm volatile("mfspr %%r3, 268" : "=r" (tsc));
+    asm volatile("mfspr %r3, 268" : "=r" (tsc));
     return tsc;
 }
 
