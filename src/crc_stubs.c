@@ -13,7 +13,8 @@ static inline uint64_t crc64(uint64_t initial, uint64_t data)
 #elif defined(__SSE4_2__)
   return __builtin_ia32_crc32di(initial, data);
 #else
-#error "Target not supported"
+/* #error "Target not supported" */
+  abort();
 #endif
 }
 #else // not ARCH_SIXTYFOUR
